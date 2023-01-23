@@ -1,0 +1,140 @@
+{% extends 'dashboard.html.twig' %}
+{% block title  %}
+    Profil
+{% endblock %}
+
+{% block body %}
+    <!-- Dashboard Headline -->
+
+    <div class="dashboard-headline">
+
+    <h3 style="font-size: 34px;font-weight: bold">Edit Profil</h3>
+
+    <!-- Breadcrumbs -->
+</div>
+
+<!-- Row -->
+<div class="row">
+    {{ form_start(form, {'method': 'post',  'attr': {'id':'formulaire','style':'width:100%'} }) }}
+
+
+
+
+        <div class="col-xl-12">
+            <div class="dashboard-box ">
+                <!-- Headline -->
+
+                <div class="content with-padding padding-bottom-0">
+
+
+                    <ul class="fields-ul">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12" style="display: flex">
+
+                                    <div class="col-md-6" >
+                                        <div class="submit-field">
+                                                <div class="row">
+
+                                                    <div class="col-xl-12">
+                                                        <div class="submit-field">
+                                                            <label style="color: #b03b42;font-weight: 700">Edit profil</label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>username</h5>
+                                        <div class="input-with-icon-left">
+
+                                            {{ form_widget(form.username,{'attr':{'class':'with-border','required':'true'}} ) }}
+                                            <i class="icon-feather-user"></i>
+                                        </div>
+                                        {{ form_errors(form.username) }}
+
+
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="submit-field">
+                                        <h5>Email</h5>
+                                        <div class="input-with-icon-left">
+
+                                            {{ form_widget(form.email,{'attr':{'class':'with-border','required':'true'}} ) }}
+                                            <i class="icon-material-baseline-mail-outline"></i>
+                                        </div>
+                                        {{ form_errors(form.email) }}
+
+
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+
+
+
+                        </li>
+
+                    </ul>
+                    <div class="col-xl-12">
+                        <input type="submit"  class=" ripple-effect big margin-top-30" value="Modifier" />
+                        {{ form_widget(form._token) }}
+                        {{ form_end(form, {'render_rest': false}) }}
+                        <br><br>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+    <div class="col-xl-12" >
+        <div class="dashboard-box">
+            <div class="headline">
+                <div class="row" style="display: flex">
+                    <div class="col-xl-8" >
+                        <h3><i class="icon-material-outline-lock"></i> Change password </h3>
+
+                    </div>
+                    <div class="col-xl-4" >
+
+                        <a href="{{ path('change_mot_de_passe', {'id': app.user.id}) }}"
+                           style="background-color: #b03b42;"
+                           class="button button-sliding-icon">
+                            Change password <i class="icon-material-outline-arrow-right-alt"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

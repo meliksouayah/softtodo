@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-xl-5 offset-xl-3">
+
+                <div class="login-register-page">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3 style="font-size: 26px;">Let's connect to your account !</h3>
+                        <span>You do not have an account ? <a href="{{ path('app_register') }}" style="font-weight: bold">Register !</a></span>
+                    </div>
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div style="text-align: center">
+                            {% include "message.html.twig" with { type: "success", message: (flashMessage) } %}
+                        </div>
+                    {% endfor %}
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                    <div style="text-align: center"> {% include "message.html.twig" with { type: "error", message: (flashMessage) } %}<div>
+                            {% endfor %}
+
+                    <!-- Account Type -->
+
+
+                    <!-- Form -->
+                    <form method="post">
+                        {% if error %}
+                            <div class="notification error closeable">
+                                <p class="text-center" style="text-align: center;">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+
+                            </div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        {% endif %}
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-baseline-mail-outline"></i>
+                            <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="input-text with-border" autocomplete="username" required autofocus placeholder="Nom d'utilisateur">
+
+                        </div>
+
+                        <div class="input-with-icon-left" title="Should be at least 8 characters long" data-tippy-placement="bottom">
+                            <i class="icon-material-outline-lock"></i>
+                            <input type="password" name="password" id="inputPassword" class="input-text with-border" autocomplete="current-password" required placeholder="Mot de passe">
+                        </div>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+
+                        {#
+                        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                        See https://symfony.com/doc/current/security/remember_me.html
+
+                        <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Remember me
+                            </label>
+                        </div>
+                        #}
+
+                        <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" style="background-color: #2a41e8">
+                            LogIn
+                        </button>
+
+                    </form>
+
+
+
+                    <!-- Button -->
+
+                    <!-- Social Login -->
+                    <div class="social-login-separator"><span>Or</span></div>
+                    <a class="button full-width  ripple-effect margin-top-10" style="background-color: #3b5998;color: white" href="{{ path('connect_facebook') }}"><i class="icon-brand-facebook-f"></i> Se Connecter via Facebook</a>
+                    <a class="button full-width  ripple-effect margin-top-10" style="background-color: white;color: black;border: 1px solid black" href="{{ path('connect_google') }}"><i class="icon-brand-google"></i> Se Connecter via Google+</a>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+{% endblock %}

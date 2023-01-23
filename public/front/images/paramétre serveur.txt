@@ -1,0 +1,6 @@
+paramétre conx serveur: 
+
+hôte :                        ftp.cluster006.hosting.ovh.net
+Identifiant:             sqliserv-malek
+password:	            Sqlimalek123
+port:                       21

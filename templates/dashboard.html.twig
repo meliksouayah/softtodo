@@ -1,0 +1,392 @@
+<!doctype html>
+
+<html lang="en" dir="ltr">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>{% block title %}{% endblock %}| test symfony </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('front/images/softtodo.png') }}"/>
+
+    <!-- CSSheader-widget hide-on-mobile
+    ================================================== -->
+
+        <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('front/css/colors/blue.css') }}">
+    <link href="{{ asset('front/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('front/datetimepicker/jquery.datetimepicker.css')}}" rel="stylesheet" type="text/css"/>
+
+    <!-- Sweet Alert-->
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" />
+
+
+    <style>
+        .help-block{
+            color: #b03b42;
+            font-weight: bold;
+        }
+
+    </style>
+
+    {% block css %}
+    {% endblock %}
+</head>
+<body class="gray">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth dashboard-header not-sticky">
+
+        <!-- Header -->
+        <div id="header">
+            <div class="container">
+
+                <!-- Left Side Content -->
+                <div class="left-side">
+
+                    <!-- Logo -->
+                    <div id="logo">
+                        <a href="{{ path('app_login') }}"><img src="{{ asset('front/images/softtodo.png') }}"></a>
+
+                    </div>
+
+                    <!-- Main Navigation -->
+                    <div class="clearfix"></div>
+                    <!-- Main Navigation / End -->
+
+                </div>
+                <!-- Left Side Content / End -->
+
+
+                <!-- Right Side Content / End -->
+                <div  class="right-side">
+
+                    <!--  Langue Notifications -->
+                    <div class="header-widget hide-on-mobile">
+
+                        <!-- Notifications -->
+                        <div class="header-notifications">
+
+
+
+                            <!-- Dropdown -->
+
+
+                        </div>
+
+                    </div>
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+                </div>
+                <!-- Right Side Content / End -->
+
+
+            </div>
+        </div>
+        <!-- Header / End -->
+
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+
+        <!-- Dashboard Sidebar
+        ================================================== -->
+        <div class="dashboard-sidebar">
+            <div class="dashboard-sidebar-inner" data-simplebar="init">
+                <div class="dashboard-nav-container">
+
+                    <!-- Responsive Navigation Trigger -->
+                    <a href="#" class="dashboard-responsive-nav-trigger">
+					<span class="hamburger hamburger--collapse" >
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</span>
+                        <span class="trigger-title"></span>
+                    </a>
+
+                    <!-- Navigation -->
+                    <div class="dashboard-nav">
+                        <div class="dashboard-nav-inner">
+
+
+
+
+
+                            <ul data-submenu-title="dashboad">
+
+
+                                <li id="dashboad"><a id="dashboad_a" href="{{ path('dashboard') }}"><i class="icon-material-outline-dashboard"></i>Dashboad</a></li>
+                           {#
+                           {% if is_granted('ROLE_ADMIN') %}
+
+
+                            <li id="project"><a id="project_a" href="{{ path('admin_project_index') }}"><i class="icon-material-outline-dashboard"></i>Project</a></li>
+                        {% else %}
+                                    <li id="project"><a id="project_a" href="{{ path('project_list') }}"><i class="icon-material-outline-dashboard"></i>Project</a></li>
+
+                                {% endif %}
+                           #}
+                            </ul>
+                            <ul data-submenu-title="project">
+
+
+                                <li id="project"><a id="project_a" href="{{ path('admin_project_index') }}"><i class="icon-material-outline-dashboard"></i>Project</a></li>
+                           {#
+                           {% if is_granted('ROLE_ADMIN') %}
+
+
+                            <li id="project"><a id="project_a" href="{{ path('admin_project_index') }}"><i class="icon-material-outline-dashboard"></i>Project</a></li>
+                        {% else %}
+                                    <li id="project"><a id="project_a" href="{{ path('project_list') }}"><i class="icon-material-outline-dashboard"></i>Project</a></li>
+
+                                {% endif %}
+                           #}
+                            </ul>
+
+                            <ul data-submenu-title="Compte">
+
+                                <li id="profil"><a id="profil_a" href="{{ path('app_profil',{'id': app.user.id}) }}"><i class="icon-material-outline-dashboard"></i>Profil</a></li>
+                                <li id="profil">
+                                    <a href="#small-dialog" class="popup-with-zoom-anim full-width ">
+                                        <i class="icon-feather-log-out"></i> Logout
+                                    </a>
+                                </li>
+
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    <!-- Navigation / End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Dashboard Sidebar / End -->
+
+
+        <!-- Dashboard Content
+        ================================================== -->
+        <div class="dashboard-content-container" data-simplebar>
+            <div class="dashboard-content-inner">
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {% include "message.html.twig" with { type: "success", message: (flashMessage) } %}
+                {% endfor %}
+                {% for flashMessage in app.session.flashbag.get('error') %}
+                    {% include "message.html.twig" with { type: "error", message: (flashMessage) } %}
+                {% endfor %}
+                {% block body %}
+                {% endblock %}
+
+                <!-- Row / End -->
+
+                <!-- Footer -->
+
+                <!-- Footer / End -->
+                <div class="dashboard-footer-spacer"></div>
+            </div>
+
+
+        </div>
+
+        <!-- Dashboard Content / End -->
+
+    </div>
+    <!-- Dashboard Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Apply for a job popup
+================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab">Logout</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Are you sure , you want to Logout ?
+                    </h3>
+                </div>
+
+                <div class="row" >
+                    <div class="col-xl-6">
+                        <a class="button  button-sliding-icon ripple-effect" href="{{ path('app_logout') }}"> Logout<i class="icon-material-outline-arrow-right-alt"></i></a>
+
+                    </div>
+                    <div class="col-xl-6">
+                        <button id="btnclose" class="button button-sliding-icon ripple-effec mfp-close " style="background-color: grey;color:white;height: 48px;width: 100% !important;margin-top: 25px;box-shadow: 0 4px 12px rgb(102 103 107 / 15%)">Cancel <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Apply for a job popup / End -->
+
+
+<!-- Scripts
+================================================== -->
+
+<script src="{{ asset('front/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('front/js/jquery-migrate-3.0.0.min.js') }}"></script>
+<script src="{{ asset('front/js/mmenu.min.js') }}"></script>
+<script src="{{ asset('front/js/tippy.all.min.js') }}"></script>
+<script src="{{ asset('front/js/simplebar.min.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap-slider.min.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('front/js/snackbar.js') }}"></script>
+<script src="{{ asset('front/js/clipboard.min.js') }}"></script>
+<script src="{{ asset('front/js/counterup.min.js') }}"></script>
+<script src="{{ asset('front/js/magnific-popup.min.js') }}"></script>
+<script src="{{ asset('front/js/slick.min.js') }}"></script>
+<script src="{{ asset('front/js/custom.js') }}"></script>
+<!-- Sweet Alerts js -->
+<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
+<!-- validation formulaire -->
+<script src="{{asset('front/js/validation.js')}}"></script>
+<script src="{{asset('front/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('front/js/message_fr.js')}}"></script>
+
+
+
+<script src="{{ asset("front/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js") }}"></script>
+<!-- datepicker ar -->
+<script src="{{ asset('front/datetimepicker/build/jquery.datetimepicker.full.js')}}"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $('.datepicker1').datepicker({
+            language: 'en',
+            clearBtn : true,
+        });
+        $('.datetimepicker1').datetimepicker({
+            timepicker: false,
+            minDate: 0,
+            format:'Y-m-d ',//'Y-m-d H:i A',
+            // formatTime:'H:i',//'H:i A',
+            step:30,
+        });
+        $.datetimepicker.setLocale('en');
+
+        /*
+        $('.test').TouchSpin({
+            min: 0,
+            max: 100,
+            step: .1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: "DT",
+            buttondown_class: "btn btn-primary",
+            buttonup_class: "btn btn-primary"
+        })
+         */
+    });
+</script>
+
+
+<script>
+    var route_name = "{{ app.request.attributes.get('_route') }}";
+    var path = "{{ app.request.pathInfo }}";
+    if(route_name == "app_profil" || route_name == "fos_user_change_password") {
+        $("#profil").addClass('active-submenu');
+        $("#profil_a").addClass('active');
+
+    }
+    if(route_name == "dashboard" ) {
+        $("#dashboad").addClass('active-submenu');
+        $("#dashboad_a").addClass('active');
+
+    }
+
+
+    if(route_name =='admin_project_index' || route_name =='admin_project_new'|| route_name =='admin_project_edit')
+    {
+
+
+        $("#project").addClass('active-submenu');
+        $("#project_a").addClass('active');
+        $('#project_new').css({
+            'background-color': 'rgb(223 147 152)',
+            'color' : 'white',
+
+        });
+        $('#project_new_a').css({
+            'color' : 'white',
+
+        });
+
+
+    }
+
+
+
+
+
+</script>
+<!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+<script>
+    // Snackbar for user status switcher
+    $('#snackbar-user-status label').click(function() {
+        Snackbar.show({
+            text: 'Your status has been changed!',
+            pos: 'bottom-center',
+            showAction: false,
+            actionText: "Dismiss",
+            duration: 3000,
+            textColor: '#fff',
+            backgroundColor: '#383838'
+        });
+    });
+</script>
+
+<!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->
+<script src="{{ asset('front/js/chart.min.js') }}"></script>
+
+
+
+
+{% block js %}
+{% endblock %}
+</body>
+</html>

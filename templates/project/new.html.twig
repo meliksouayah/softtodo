@@ -1,0 +1,124 @@
+{% extends 'dashboard.html.twig' %}
+
+
+{% block css %}
+    <link href="{{ asset("assets/css/bootstrap-rtl.min.css") }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        {% include "message.html.twig" with { type: "error", message: ( result_twig ) } %}
+    {% endfor %}
+
+    <div class="container">
+        <!-- Headline -->
+        <div class="headline">
+            <div class="row" style="display: flex">
+                <div class="col-6">
+
+                </div>
+                <div class="col-6" >
+                    <h3 style="float: right"><i class="icon-material-outline-arrow-back"></i> <a href="{{ path('admin_project_index') }}" >Back to the list</a></h3>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+            {{ form_start(form, { 'attr': {'id':'formulaire'} }) }}
+            {{ form_widget(form._token) }}
+            <div class="row">
+
+                <div class="row" style="display: flex">
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Picture</h5>
+
+                            <div class="uploadButton 0" ><!--style="border: 1px solid #b03b42;"-->
+                                <input type="file" id="app_project_picture" name="app_project_picture[picture]" required="required" accept="image/*" maxsize="100M" class="uploadButton-input ">
+                                <label class="uploadButton-button " for="app_project_picture" >Upload image</label>
+                                <span class="uploadButton-file-name" data-for="app_project_picture">Your File ...</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Filename</h5>
+
+                            {{ form_widget(form.filename, { 'attr': {'class': 'with-border','required':'true'} }) }}
+                            {{ form_errors(form.filename) }}
+
+
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Title </h5>
+
+                            {{ form_widget(form.title, { 'attr': {'class': 'with-border','required':'true'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Description </h5>
+
+                            {{ form_widget(form.description, { 'attr': {'class': 'with-border','required':'true'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Status </h5>
+
+                            {{ form_widget(form.status, { 'attr': {'class': 'selectpicker margin-bottom-20','required':'true'} }) }}
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="submit-field">
+                            <h5>Number of tasks </h5>
+
+                            {{ form_widget(form.number_task, { 'attr': {'class': 'with-border','required':'true','digits':'true'} }) }}
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-12">
+                    <div class="submit-field">
+                       <input type="submit" value="register">
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            {{ form_end(form, {render_rest: false}) }}
+
+
+
+
+    </div>
+
+
+
+
+{% endblock %}
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            console.log( document.getElementById("project_title"));
+
+            //document.getElementById("news_title").required = false;
+
+            //document.getElementById("news_title").required = false;
+        });
+    </script>
+
+
+
+
+
+{% endblock %}

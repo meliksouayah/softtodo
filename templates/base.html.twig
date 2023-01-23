@@ -1,0 +1,124 @@
+<!doctype html>
+
+<html lang="fr" dir="ltr">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>{% block title %}{% endblock %} | Alou Ala</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('front/images/softtodo.png') }}"/>
+
+
+    <!-- CSS
+    ================================================== -->
+
+        <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+
+
+    <!-- Sweet Alert-->
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="{{ asset('front/css/colors/red.css') }}">
+
+<style>
+    #navigation ul li a i{
+        font-size: 17px !important;
+    }
+    .help-block{
+       color: #9b0303;
+        font-weight: bold;
+    }
+    .with-errors{
+       color: #9b0303;
+        font-weight: bold;
+    }
+    .with-errors ul li{
+        list-style: none;
+
+    }
+    .current{font-weight: bold !important;}
+</style>
+
+    {% block css %}
+    {% endblock %}
+
+
+</head>
+<body>
+
+<!-- Wrapper -->
+
+<!-- Wrapper -->
+    <div id="wrapper" {% if app.request.attributes.get('_route')=='home' %}class="wrapper-with-transparent-header"{% endif %}>
+
+
+        <header id="header-container"
+            {% if app.request.attributes.get('_route')=='home' %}
+                class="fullwidth transparent-header unsticky"
+            {% else %}
+                class="fullwidth not-sticky"
+        {% endif %}>
+        <!-- Header -->
+        <!-- Header / End -->
+
+    </header>
+
+
+    <!-- Header Container
+    ================================================== -->
+    <!-- Header Container
+    ================================================== -->
+    <!-- Header Container / End -->
+
+    {% block body %}
+    {% endblock %}
+
+    <!-- Footer
+    ================================================== -->
+
+
+    <!-- Footer / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+================================================== -->
+<script src="{{ asset('front/js/jquery-3.3.1.min.js') }}"></script>
+
+<script src="{{ asset('front/js/jquery-migrate-3.0.0.min.js') }}"></script>
+<script src="{{ asset('front/js/mmenu.min.js') }}"></script>
+<script src="{{ asset('front/js/tippy.all.min.js') }}"></script>
+<script src="{{ asset('front/js/simplebar.min.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap-slider.min.js') }}"></script>
+<script src="{{ asset('front/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('front/js/snackbar.js') }}"></script>
+<script src="{{ asset('front/js/clipboard.min.js') }}"></script>
+<script src="{{ asset('front/js/counterup.min.js') }}"></script>
+<script src="{{ asset('front/js/magnific-popup.min.js') }}"></script>
+<script src="{{ asset('front/js/slick.min.js') }}"></script>
+<script src="{{ asset('front/js/custom.js') }}"></script>
+<!-- Sweet Alerts js -->
+<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/js/pages/sweet-alerts.init.js') }}"></script>
+
+<!-- validation formulaire -->
+<script src="{{asset('front/js/validation.js')}}"></script>
+<script src="{{asset('front/js/jquery.validate.min.js')}}"></script>
+
+
+{% block js %}
+{% endblock %}
+<script>
+    var route_name = "{{ app.request.attributes.get('_route') }}";
+    var path = "{{ app.request.pathInfo }}";
+
+
+    </script>
+</body>
+</html>

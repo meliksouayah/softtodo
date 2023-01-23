@@ -1,0 +1,192 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block css %}
+   {#
+   {% if app.request.attributes.get('_route')=='event_list' %}
+    <style>
+        body .transparent-header #navigation > ul li a, .transparent-header .header-notifications-trigger, .transparent-header .header-notifications-trigger a{
+            color: black;
+        }
+    </style>
+        {% endif %}
+   #}
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12">
+                <form method="post">
+                    <div class="intro-banner-search-form margin-top-95">
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <label for="autocomplete-input" class="field-title ripple-effect">Search</label>
+
+                        <select class="selectpicker default" multiple data-selected-text-format="count"  title="Project Name"  name="name" id="name">
+                            {% if projectss is not empty %}
+                                {% for project in projectss %}
+
+                                    <option>{{ project.title }}</option>
+
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <select class="selectpicker default" multiple data-selected-text-format="count"  title="Status Project " name="status" id="status">
+
+
+                            <option value="in progress">In Progress</option>
+                            <option value="done">Done</option>
+                            <option value="blocked">Blocked</option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field with-autocomplete">
+                        <div class="input-with-icon">
+                            <input  type="text" placeholder="filename" name="filename" id="filename">
+                            <i class="icon-feather-download"></i>
+                        </div>
+                    </div>
+
+                    <!-- Search Field -->
+
+                    <!-- Button -->
+                    <div class="intro-search-button">
+                        <button class="button ripple-effect" type="submit">Search</button>
+                    </div>
+
+                    </div>
+                </form>
+
+
+
+
+        </div>
+    </div>
+    <div class="container-fluid">
+
+
+        <!-- Full Page Sidebar / End -->
+
+        <!-- Full Page Content -->
+
+
+        {% if projects is empty %}
+            <div class="col-xl-12 content-left-offset">
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="notification notice " style="text-align: center">
+
+                    <p>
+                        <br>
+                        <i class="help-icon"></i>there is no projects
+                        <br>
+                        <br>
+                    </p>
+                </div>
+            </div>
+
+        {% else %}
+            {#
+            <div class="row" style="display:flex;">
+            <div class="col-xl-8">
+                <h1 style="font-weight: bold;margin-left: 2%;margin-top: 6%;">
+                    {{ 'translate.project'|trans }}
+
+                </h1>
+            </div>
+            <div class="col-xl-3">
+                <div class="notify-box margin-top-15" style="margin-left: 30%;background-color: white">
+
+                    <span> {{ 'translate.project.list1'|trans }}:</span>
+                    <select class="selectpicker hide-tick" name="type" id="type">
+
+                        <option selected value="all" disabled>{{ 'translate.project.list2'|trans }}</option>
+
+                        <option value="DESC">{{ 'translate.project.list3'|trans }}</option>
+                        <option value="ASC">{{ 'translate.project.list4'|trans }}</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+            #}
+            <!-- Features Cities -->
+            <div class="section margin-top-65 margin-bottom-65">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Section Headline -->
+                        <div class="col-xl-12">
+                            <div class="section-headline centered margin-top-0 margin-bottom-45">
+                                <h3>Projects</h3>
+                            </div>
+                        </div>
+                        {% for project in projects %}
+                        <div class="col-xl-3 col-md-6">
+                            <!-- Photo Box -->
+                            <a href="{{ path('project_details', {'id': project.id}) }}" class="photo-box" data-background-image="{{ asset('uploads/project/'~project.picture) }}">
+                                <div class="photo-box-content">
+                                    <h3>{{ project.title|raw }}</h3>
+                                    <span >
+                                          {{ project.createdat|date('d') }}/{{ project.createdat|date('m') }}/{{ project.createdat|date('Y') }}
+                                       </span>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+            <!-- Features Cities / End -->
+
+            <!--Freelancer -->
+
+        {% endif %}
+
+
+
+    </div>
+    <!-- Full Page Content / End -->
+
+    <div class="clearfix"></div>
+    <!-- Pagination -->
+    <div class="clearfix"></div>
+
+    <!-- Pagination -->
+    <div class="pagination-container margin-top-40 margin-bottom-0">
+        <nav class="pagination">
+
+            {{ knp_pagination_render(projects) }}
+
+        </nav>
+    </div>
+
+
+    <!-- Pagination / End -->
+
+
+
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}

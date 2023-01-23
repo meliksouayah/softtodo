@@ -1,0 +1,125 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Edit project{% endblock %}
+
+{% block css %}
+    <link href="{{ asset("assets/css/bootstrap-rtl.min.css") }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+
+{% endblock %}
+{% block body %}
+
+    <div class="dashboard-box margin-top-0">
+
+        <!-- Headline -->
+        <div class="headline">
+            <div class="row" style="display: flex">
+                <div class="col-6">
+                    <h3><i class="icon-feather-folder-plus"></i>Edit project</h3>
+
+                </div>
+                <div class="col-6">
+                    <h3 style="float: right"><i class="icon-material-outline-arrow-back"></i> <a href="{{ path('admin_project_index') }}" >Return to list</a></h3>
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="content with-padding padding-bottom-10">
+
+            {{ form_start(form, { 'attr': {'id':'formulaire'} }) }}
+            {{ form_widget(form._token) }}
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="submit-field">
+                        <h5>Titre </h5>
+
+                        {{ form_widget(form.title, { 'attr': {'class': 'with-border','required':'true'} }) }}
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="submit-field">
+                        <h5>Description </h5>
+
+                        {{ form_widget(form.description, { 'attr': {'class': 'with-border','required':'true'} }) }}
+                    </div>
+                </div>
+
+                <div class="col-xl-12" style="display: flex">
+
+                    <div class="col-lg-6">
+                        <h5>Picture</h5>
+
+                        <img src="{{ asset(project.getCoverPictureFullPath) }}"  style="width: 300px ;height: 160px"/>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="submit-field">
+                            <br><br>
+
+                            <div class="uploadButton 0" ><!--style="border: 1px solid #b03b42;"-->
+                                <input type="file" id="app_preject_picture" name="app_preject[picture]" accept="image/*" maxsize="100M" class="uploadButton-input ">
+                                <label class="uploadButton-button big " for="app_preject_picture"><i class="icon-line-awesome-cloud-upload"></i>&nbsp;Upload File</label>
+                                <span class="uploadButton-file-name" data-for="app_preject_picture">Your File ...</span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-xl-12" style="display: flex">
+
+                    <div class="col-lg-6">
+                        <h5>Filename</h5>
+
+                        <img src="{{ asset(project.getpdfFullPath) }}"  style="width: 300px ;height: 160px"/>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="submit-field">
+                            <br><br>
+
+                            <div class="uploadButton 0" ><!--style="border: 1px solid #b03b42;"-->
+                                <input type="file" id="app_preject_filename" name="app_preject[filename]" accept="image/*" maxsize="100M" class="uploadButton-input ">
+                                <label class="uploadButton-button big " for="app_preject_filename"><i class="icon-line-awesome-cloud-upload"></i>&nbsp;Upload File</label>
+                                <span class="uploadButton-file-name" data-for="app_preject_filename">Your File ...</span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-xl-12" >
+                    <br>
+                </div>
+                <div class="col-xl-12" >
+                    <div class="row" style="display: flex">
+                        <div class="col-xl-4"></div>
+                        <div class="col-xl-4">
+                            <button type="submit" class="button ripple-effect" style="width: 70%;">Edit </button>
+
+                        </div>
+                        <div class="col-xl-4"></div>
+                    </div>
+
+                </div>
+
+            </div>
+            {{ form_end(form, {render_rest: false}) }}
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}

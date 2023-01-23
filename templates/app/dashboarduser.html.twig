@@ -1,0 +1,92 @@
+{% extends 'dashboard.html.twig' %}
+{% block title  %}
+    dashboard
+{% endblock %}
+{% block css %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+{% endblock %}
+
+{% block body %}
+    <!-- Dashboard Content
+================================================== -->
+
+
+
+
+
+
+
+
+<div class="container">
+
+
+            <div class="row">
+
+                <div class="col-xl-12">
+                    <h2 style="font-weight: bold;color: black">
+
+
+                      Statistics
+
+                    </h2>
+                </div>
+                <div class="col-xl-12">
+                    <!-- Dashboard Box -->
+                    <div class="dashboard-box main-box-in-row">
+                        <div class="headline">
+                            <h3><i class="icon-feather-bar-chart-2"></i> </h3>
+
+                        </div>
+                        <div class="content">
+                            <!-- Chart -->
+                            <canvas id="myChart" style="width:100%;max-width:850px"></canvas>
+
+                        </div>
+                    </div>
+                    <!-- Dashboard Box / End -->
+                </div>
+                <div class="col-xl-4">
+
+                    <!-- Dashboard Box -->
+                    <!-- If you want adjust height of two boxes
+                         add to the lower box 'main-box-in-row'
+                         and 'child-box-in-row' to the higher box -->
+                    <!-- Dashboard Box / End -->
+                </div>
+            </div>
+
+
+</div>
+
+
+
+    <!-- Dashboard Content / End -->
+{% endblock %}
+{% block js %}
+
+
+    <script>
+        var xValues = ["Frane", "England", "Spain", "Tunisia","Algeria", "Italy","Usa","Other"];
+        var yValues = [123,50 , 600, 300, 231,33,95,100];
+        var barColors = ["red", "green","blue","orange","brown",'black','purple',"yellow"];
+
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Statistic by country"
+                }
+            }
+        });
+    </script>{% endblock %}
+

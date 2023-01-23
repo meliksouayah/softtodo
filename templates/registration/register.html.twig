@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-xl-5 offset-xl-3">
+
+                <div class="login-register-page">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3 style="font-size: 26px;">Let's create your account!</h3>
+                        <span>Already have an account ? <a href="{{ path('app_login') }}">Login !</a></span>
+                    </div>
+
+
+                    <!-- Account Type -->
+
+
+                    <!-- Form -->
+                    {{ form_start(form, {'method': 'post', 'action': path('app_register'), 'attr': {'id':'formulaire',novalidate: 'novalidate'}}) }}
+                    {{ form_widget(form._token) }}
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="input-with-icon-left">
+                                <i class="icon-material-baseline-mail-outline"></i>
+                                {{ form_widget(form.username, { 'attr': {'class': 'input-text with-border','placeholder':"username",'required':'true' } }) }}
+                                <div class="help-block">
+
+                                    {{ form_errors(form.username) }}
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <div class="input-with-icon-left">
+                                <i class="icon-material-baseline-mail-outline"></i>
+                                {{ form_widget(form.email, { 'attr': {'class': 'input-text with-border','placeholder':"E-mail",'required':'true' } }) }}
+                                <div class="help-block">
+
+                                    {{ form_errors(form.email) }}
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-with-icon-left" title="Should be at least 4 characters long" data-tippy-placement="bottom">
+                            <i class="icon-material-outline-lock"></i>
+                            {{ form_widget(form.plainPassword, { 'attr': {'class': 'input-text with-border','placeholder':"Password",'required':'required' } }) }}
+                        </div>
+                        <div class="with-errors">
+                            {{ form_errors(form.plainPassword) }}
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- Button -->
+                <input class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit" value="Register" >
+
+                <!-- Social Login -->
+                <div class="social-login-separator"><span>or</span></div>
+                <a class="button full-width  ripple-effect margin-top-10" style="background-color: #3b5998;color: white" href="{{ path('connect_facebook') }}"><i class="icon-brand-facebook-f"></i> Register with Facebook</a>
+                <a class="button full-width  ripple-effect margin-top-10" style="background-color: white;color: black;border: 1px solid black" href="{{ path('connect_google') }}"><i class="icon-brand-google"></i> Register with Google+</a>
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+    {{ form_end(form, {render_rest: false}) }}<!--, {render_rest: false}-->
+    <br>
+    <br>
+{% endblock %}

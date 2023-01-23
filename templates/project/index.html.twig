@@ -1,0 +1,227 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block body %}
+    <!-- Titlebar
+    ================================================== -->
+    <div class="container">
+        <div class="row" style="display: flex">
+            <div class="col-xl-9">
+
+                <h2 style="font-weight: bold">project list</h2>
+
+                <!-- Breadcrumbs -->
+            </div>
+            <div class="col-xl-3">
+                <a href="{{ path('admin_project_new') }}" class="button button ripple-effect" >Add project <i class="icon-material-outline-add-circle-outline"></i></a>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post">
+                <div class="intro-banner-search-form margin-top-95">
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <label for="autocomplete-input" class="field-title ripple-effect">Search</label>
+
+                        <select class="selectpicker default" multiple data-selected-text-format="count"  title="Project Name"  name="name" id="name">
+                            {% if projectss is not empty %}
+                                {% for project in projectss %}
+
+                                    <option>{{ project.title }}</option>
+
+                                {% endfor %}
+                            {% endif %}
+                        </select>
+                    </div>
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <select class="selectpicker default" multiple data-selected-text-format="count"  title="Status Project " name="status" id="status">
+
+
+                            <option value="in progress">In Progress</option>
+                            <option value="done">Done</option>
+                            <option value="blocked">Blocked</option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field with-autocomplete">
+                        <div class="input-with-icon">
+                            <input  type="text" placeholder="filename" name="filename" id="filename">
+                            <i class="icon-feather-download"></i>
+                        </div>
+                    </div>
+
+                    <!-- Search Field -->
+
+                    <!-- Button -->
+                    <div class="intro-search-button">
+                        <button class="button ripple-effect" type="submit">Search</button>
+                    </div>
+
+                </div>
+            </form>
+
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Dashboard Box -->
+        <div class="freelancers-container freelancers-list-layout margin-top-35">
+
+            <!--Freelancer -->
+            {% for project in projects %}
+                <div class="freelancer">
+
+                    <!-- Overview -->
+                    <div class="freelancer-overview" style="padding: 0px 0px !important;">
+                        <div class="freelancer-overview-inner">
+
+                            <!-- Bookmark Icon -->
+                            <span class="bookmark-icon"></span>
+
+                            <!-- Avatar -->
+                            <div class="freelancer-avatar" style="width: 200px !important;">
+                                <img src="{{ asset(project.getCoverPictureFullPath) }}" style="width: 200px !important;height: 150px;border-radius: 0;max-width: inherit !important;"/>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="freelancer-name">
+                                <h4 style="font-weight: bold;margin-left: 27px;"><a href="#">{{ project.title|raw  }}
+                                    </a></h4>
+
+                                <!-- Rating -->
+                                <div class="freelancer-details-list" style="padding: 10px 0px;">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="freelancer-details" style="text-align: end;">
+                            <div class="row" style="margin-top: 2%;padding: -1px 46px">
+                                <div class="col-lg-6">
+
+
+                                    <a href="{{ path('admin_project_edit', { 'id': project.id }) }}" class="ripple-effect " title="Edit" data-tippy-placement="top" style="color: #b03b42;font-weight: bold;cursor:pointer;"> Edit  <i class="icon-feather-edit-2" style="color: #b03b42;font-weight: bold"></i> </a>
+
+
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <a onClick="supprimerproject('{{project.id}}')" class="ripple-effect " title="Delete" data-tippy-placement="top" style="color: #b03b42;font-weight: bold;cursor:pointer;">Delete  <i class="icon-feather-trash-2" style="color: #b03b42;font-weight: bold"></i></a>
+
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- Details -->
+
+                </div>
+                <!-- Pagination -->
+
+
+            {% endfor %}
+
+                    <div class="pagination-container margin-top-40 margin-bottom-0" >
+                        <nav class="pagination" >
+
+                            {{ knp_pagination_render(projects) }}
+
+                        </nav>
+                    </div>
+
+
+            <!-- Freelancer / End -->
+
+
+
+        </div>
+
+
+{% endblock %}
+{% block js %}
+
+    <script>
+        //SWEET ALERT DELETE project
+        function supprimerproject(id){
+            Swal.fire({
+                title: "Are you Sur ?",
+                text: "Do you want to delete this project ! ",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes Delete !",
+                cancelButtonText: "No !",
+                confirmButtonClass: "button ripple-effect",
+                cancelButtonClass: "button gray ripple-effect ",
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                buttonsStyling: !1
+            }).then(function(t) {
+                t.value ?
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{path('delete_project')}}",
+                        data: {id: id},
+                        beforeSend: function () {
+
+                        },
+
+                        success: function (data) {
+                            console.log(data);
+                            Swal.fire({
+                                title: "Congratulations !",
+                                text: data.message,
+                                icon: "success",
+                                showConfirmButton: !1,
+                                timer: 3000
+                            });
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+
+                        },
+                        error: function (request, status, errorThrown) {
+                            Swal.fire({
+                                title: "error !",
+                                icon: "error"
+                            })
+                        }
+                    })
+                    :
+                    t.dismiss === Swal.DismissReason.cancel && Swal.fire({
+                        title: "canceled",
+                        confirmButtonText: "Yes",
+                        //text: "Your imaginary file is safe :)",
+                        icon: "error"
+                    })
+            })
+        }
+    </script>
+{% endblock %}

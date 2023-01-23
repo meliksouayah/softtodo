@@ -1,0 +1,123 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}
+    Change password
+{% endblock  %}
+{% block css %}
+    <style>
+        li{
+            color: #d34c4c;
+
+        }
+        li:nth-child(6) {
+            list-style-type: none;
+        }
+    </style>
+{% endblock css %}
+{% block body %}
+
+<form method="post" id="formulaire" class="form-horizontal" novalidate>
+<div class="content">
+    <div class="dashboard-box-list">
+        <ul class="job-listing">
+            <li>
+                <!-- Job Listing Details -->
+                <div class="job-listing-details">
+
+                    <!-- Logo -->
+
+
+                    <!-- Details -->
+                    <div class="job-listing-description">
+                        <label  style="font-size:34px;font-weight: bold;color: black">    Change password
+                        </label>
+                        <br>
+                        <div class="col-xl-12">
+                            <label for="current_password" class="form-label">Enter the old password</label>
+
+                            <div class="input-with-icon-right no-border">
+                                <input id="old_password" name="old_password" type="password" placeholder="Enter the old password" minlength="4" style="padding: 2%" required>
+                                <i class="icon-feather-eye" id="togglePassword1" style="color: #b03b42;margin-left: 96%;background-color: white"></i>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="plainPassword_first" class="form-label"> Enter the new password</label>
+
+                            <div class="input-with-icon-right no-border">
+                                <input id="new_password" name="new_password" type="password" placeholder="Enter the new password" minlength="4" style="padding: 2%" required>
+
+                                <i class="icon-feather-eye" id="togglePassword2" style="color: #b03b42;margin-left: 96%;background-color: white"></i>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xl-12">
+                            <label for="plainPassword_second" class="form-label"> Repeate the new password</label>
+
+                            <div class="input-with-icon-right no-border">
+                                <input id="new2_password" name="new2_password" type="password" placeholder="Repeate the new password" minlength="4" style="padding: 2%" required />
+
+                                <i class="icon-feather-eye" id="togglePassword3" style="color: #b03b42;margin-left: 96%;background-color: white"></i>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xl-12">
+                            <button type="submit" class="button ripple-effect ">Edit
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>
+  </form>
+{% endblock body %}
+{% block js %}
+
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword1');
+        const password = document.querySelector('#old_password');
+
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('icon-feather-eye-off');
+        });
+    </script>
+    <script>
+        const togglePassword2 = document.querySelector('#togglePassword2');
+        const password2 = document.querySelector('#new_password');
+
+        togglePassword2.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+            password2.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('icon-feather-eye-off');
+        });
+    </script>
+    <script>
+        const togglePassword3 = document.querySelector('#togglePassword3');
+        const password3 = document.querySelector('#new2_password');
+
+        togglePassword3.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password3.getAttribute('type') === 'password' ? 'text' : 'password';
+            password3.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('icon-feather-eye-off');
+        });
+    </script>
+{% endblock  %}
